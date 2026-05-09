@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MainDraw | Download the App</title>
+    <meta
+      name="description"
+      content="Join MainDraw tournaments by skill level and compete for prize pools up to £3,000+."
+    />
+    <style>
+      :root {
+        --brand-green: #0e3300;
+        --brand-lime: #9ae36d;
+        --bg-dark: #0a2500;
+        --surface: #ffffff;
+        --surface-soft: #f4f8f2;
+        --text-primary: #0e3300;
+        --text-muted: #35572a;
+        --line-soft: #d9e7d2;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        color: var(--text-primary);
+        background:
+          radial-gradient(80rem 40rem at 20% -10%, #1d4f0d 0%, transparent 65%),
+          radial-gradient(80rem 40rem at 100% 0%, #123902 0%, transparent 65%),
+          linear-gradient(180deg, #0b2800 0%, #102f01 45%, #143902 100%);
+        display: grid;
+        place-items: center;
+        padding: 1rem;
+      }
+
+      .shell {
+        width: min(980px, 100%);
+      }
+
+      .top-bar {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 1rem;
+      }
+
+      .contact-link {
+        color: #d9efca;
+        text-decoration: none;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        opacity: 0.6;
+        pointer-events: none;
+        cursor: not-allowed;
+      }
+
+      .card {
+        border-radius: 30px;
+        overflow: hidden;
+        background: linear-gradient(145deg, #f8fcf5 0%, #eef6e9 100%);
+        border: 1px solid #264e14;
+        box-shadow:
+          0 30px 70px rgba(0, 0, 0, 0.32),
+          0 10px 22px rgba(18, 57, 2, 0.25);
+      }
+
+      .hero {
+        position: relative;
+        padding: 1.6rem 1.2rem 1.35rem;
+        background: linear-gradient(165deg, #ffffff 0%, #f2f8ee 70%, #e9f3e2 100%);
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 10% 0%, rgba(154, 227, 109, 0.32) 0%, transparent 45%);
+        pointer-events: none;
+      }
+
+      .logo-wrap {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        place-items: center;
+      }
+
+      .logo-wrap img {
+        width: clamp(58px, 10vw, 82px);
+        height: clamp(58px, 10vw, 82px);
+        border-radius: 18px;
+        object-fit: cover;
+        box-shadow: 0 8px 22px rgba(14, 51, 0, 0.22);
+      }
+
+      h1 {
+        position: relative;
+        z-index: 1;
+        margin: 1.05rem 0 0;
+        text-align: center;
+        font-size: clamp(1.85rem, 4.9vw, 3.4rem);
+        line-height: 1.04;
+        letter-spacing: -0.02em;
+      }
+
+      .accent {
+        color: var(--brand-green);
+        background: linear-gradient(180deg, transparent 0%, transparent 54%, var(--brand-lime) 54%, var(--brand-lime) 100%);
+        padding: 0 0.25rem;
+        border-radius: 8px;
+      }
+
+      .lead {
+        position: relative;
+        z-index: 1;
+        margin: 1rem auto 0;
+        max-width: 58ch;
+        text-align: center;
+        font-size: clamp(1rem, 2.4vw, 1.16rem);
+        line-height: 1.6;
+        color: var(--text-muted);
+      }
+
+      .content {
+        background: var(--surface);
+        padding: 1.25rem 1.2rem 1.4rem;
+      }
+
+      .feature-grid {
+        display: grid;
+        gap: 0.8rem;
+      }
+
+      .feature {
+        border: 1px solid var(--line-soft);
+        border-radius: 16px;
+        padding: 0.9rem;
+        background: var(--surface-soft);
+      }
+
+      .feature strong {
+        display: block;
+        font-size: 1rem;
+        margin-bottom: 0.35rem;
+      }
+
+      .feature p {
+        margin: 0;
+        line-height: 1.45;
+        color: #416235;
+      }
+
+      .cta {
+        margin-top: 1.15rem;
+        padding: 1.1rem;
+        border-radius: 18px;
+        background: linear-gradient(135deg, #113b02 0%, #0a2a00 100%);
+        color: #e8f7de;
+        display: grid;
+        justify-items: center;
+        gap: 0.75rem;
+        text-align: center;
+      }
+
+      .cta p {
+        margin: 0;
+        font-weight: 600;
+        font-size: 0.98rem;
+      }
+
+      .appstore-link {
+        display: inline-flex;
+        border-radius: 10px;
+        overflow: hidden;
+        line-height: 0;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+      }
+
+      .appstore-link img {
+        display: block;
+        height: 56px;
+        width: auto;
+      }
+
+      .footnote {
+        margin: 1.05rem 0 0;
+        text-align: center;
+        color: #5f7f52;
+        font-size: 0.89rem;
+      }
+
+      @media (min-width: 760px) {
+        body {
+          padding: 2rem;
+        }
+
+        .top-bar {
+          margin-bottom: 1.2rem;
+        }
+
+        .hero {
+          padding: 2.4rem 2.2rem 2rem;
+        }
+
+        .content {
+          padding: 1.8rem 2.2rem 2rem;
+        }
+
+        .feature-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .cta {
+          margin-top: 1.45rem;
+          padding: 1.35rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <div class="top-bar">
+        <a class="contact-link" href="#" aria-disabled="true">Contact</a>
+      </div>
+
+      <section class="card" aria-label="MainDraw app download">
+        <div class="hero">
+          <div class="logo-wrap">
+            <img src="../official_logo.png" alt="MainDraw logo" />
+          </div>
+
+          <h1>
+            Step into competitive tennis with
+            <span class="accent">£3,000+ prizes</span>
+          </h1>
+
+          <p class="lead">
+            MainDraw is the tournament system for ambitious players. Join structured competitions, track your progress,
+            and play meaningful matches that reward consistency.
+          </p>
+        </div>
+
+        <div class="content">
+          <div class="feature-grid">
+            <article class="feature">
+              <strong>Balanced competition by skill level</strong>
+              <p>Tournaments are split by player ability so every bracket stays fair, competitive, and exciting.</p>
+            </article>
+            <article class="feature">
+              <strong>High-value prize opportunities</strong>
+              <p>Compete in events with regular payouts and promotional prize pools up to £3,000 and beyond.</p>
+            </article>
+            <article class="feature">
+              <strong>Simple match-day experience</strong>
+              <p>Use the app to enter events, manage fixtures, and follow your route through each tournament.</p>
+            </article>
+            <article class="feature">
+              <strong>Built for serious players</strong>
+              <p>Train, compete, and progress in a competitive ecosystem designed to reward performance over time.</p>
+            </article>
+          </div>
+
+          <div class="cta">
+            <p>Download MainDraw on iOS</p>
+            <a class="appstore-link" href="#" aria-label="Available on the App Store">
+              <img
+                src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                alt="Download on the App Store"
+              />
+            </a>
+          </div>
+
+          <p class="footnote">Scan, install, and enter your next tournament in minutes.</p>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

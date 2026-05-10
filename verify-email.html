@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verify your email | MainDraw</title>
+    <meta name="robots" content="noindex,nofollow" />
+    <meta
+      name="description"
+      content="Confirm your MainDraw email address to start joining tournaments and competitive matches."
+    />
+    <style>
+      :root {
+        --brand-green: #0e3300;
+        --brand-lime: #9ae36d;
+        --bg-dark: #0a2500;
+        --surface: #ffffff;
+        --surface-soft: #f4f8f2;
+        --text-primary: #0e3300;
+        --text-muted: #35572a;
+        --line-soft: #d9e7d2;
+        --error: #b00020;
+        --success: #1e5a3a;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        color: var(--text-primary);
+        background:
+          radial-gradient(80rem 40rem at 20% -10%, #1d4f0d 0%, transparent 65%),
+          radial-gradient(80rem 40rem at 100% 0%, #123902 0%, transparent 65%),
+          linear-gradient(180deg, #0b2800 0%, #102f01 45%, #143902 100%);
+        display: grid;
+        place-items: center;
+        padding: 1.5rem;
+      }
+
+      .shell {
+        width: min(520px, 100%);
+      }
+
+      .card {
+        border-radius: 24px;
+        overflow: hidden;
+        background: linear-gradient(145deg, #f8fcf5 0%, #eef6e9 100%);
+        border: 1px solid #264e14;
+        box-shadow: 0 30px 70px rgba(0, 0, 0, 0.32), 0 10px 22px rgba(18, 57, 2, 0.25);
+      }
+
+      .hero {
+        position: relative;
+        padding: 1.6rem 1.6rem 1rem;
+        text-align: center;
+        background: linear-gradient(165deg, #ffffff 0%, #f2f8ee 70%, #e9f3e2 100%);
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 10% 0%, rgba(154, 227, 109, 0.32) 0%, transparent 45%);
+        pointer-events: none;
+      }
+
+      .logo-wrap {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        place-items: center;
+        margin-bottom: 0.8rem;
+      }
+
+      .logo-wrap img {
+        width: 88px;
+        height: 88px;
+        border-radius: 14px;
+        object-fit: cover;
+      }
+
+      h1 {
+        position: relative;
+        z-index: 1;
+        margin: 0.2rem 0 0;
+        font-size: clamp(1.4rem, 4vw, 1.85rem);
+        line-height: 1.1;
+        letter-spacing: -0.01em;
+      }
+
+      .lead {
+        position: relative;
+        z-index: 1;
+        margin: 0.7rem auto 0;
+        max-width: 44ch;
+        font-size: 0.98rem;
+        line-height: 1.5;
+        color: var(--text-muted);
+      }
+
+      .content {
+        background: var(--surface);
+        padding: 1.4rem 1.6rem 1.6rem;
+      }
+
+      .status {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.85rem 1rem;
+        border-radius: 14px;
+        font-size: 0.95rem;
+        line-height: 1.4;
+        border: 1px solid var(--line-soft);
+        background: var(--surface-soft);
+      }
+
+      .status .dot {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+
+      .status[data-state="loading"] .dot {
+        background: var(--brand-lime);
+        animation: pulse 1.2s ease-in-out infinite;
+      }
+      .status[data-state="success"] {
+        border-color: #a8d498;
+        background: #e8f5ea;
+        color: var(--success);
+      }
+      .status[data-state="success"] .dot {
+        background: var(--success);
+      }
+      .status[data-state="error"] {
+        border-color: #f5c2cc;
+        background: #fdecef;
+        color: var(--error);
+      }
+      .status[data-state="error"] .dot {
+        background: var(--error);
+      }
+
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.4); opacity: 0.45; }
+      }
+
+      .actions {
+        display: grid;
+        gap: 0.55rem;
+        margin-top: 1rem;
+      }
+
+      .btn {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.85rem 1rem;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 0.98rem;
+        text-decoration: none;
+        transition: opacity 0.15s ease;
+        border: 1px solid transparent;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .btn:active { opacity: 0.85; }
+      .btn-primary {
+        background: var(--brand-lime);
+        color: #000000;
+      }
+      .btn-secondary {
+        background: var(--surface);
+        color: var(--text-primary);
+        border-color: var(--line-soft);
+      }
+
+      .footnote {
+        margin: 1rem 0 0;
+        text-align: center;
+        color: #5f7f52;
+        font-size: 0.82rem;
+      }
+
+      @media (min-width: 720px) {
+        .hero {
+          padding: 2rem 2rem 1.2rem;
+        }
+        .content {
+          padding: 1.6rem 2rem 1.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="card" aria-label="Verify your MainDraw email">
+        <div class="hero">
+          <div class="logo-wrap">
+            <img src="./official_logo2.png" alt="MainDraw logo" />
+          </div>
+          <h1 id="title">Verifying your email…</h1>
+          <p class="lead" id="lead">Hold on a second while we confirm your address.</p>
+        </div>
+
+        <div class="content">
+          <div class="status" data-state="loading" id="status">
+            <span class="dot" aria-hidden="true"></span>
+            <span id="statusText">Checking your verification link…</span>
+          </div>
+
+          <div class="actions" id="actions" hidden>
+            <a class="btn btn-primary" id="primaryBtn" href="/">Open MainDraw</a>
+            <a class="btn btn-secondary" id="secondaryBtn" href="mailto:support@maindraw.co.uk">Contact support</a>
+          </div>
+
+          <p class="footnote">If this wasn't you, you can safely close this page.</p>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      (function () {
+        var qs = new URLSearchParams(window.location.search);
+        var token = (qs.get('token') || '').trim();
+        var statusEl = document.getElementById('status');
+        var statusText = document.getElementById('statusText');
+        var titleEl = document.getElementById('title');
+        var leadEl = document.getElementById('lead');
+        var actionsEl = document.getElementById('actions');
+        var primaryBtn = document.getElementById('primaryBtn');
+        var secondaryBtn = document.getElementById('secondaryBtn');
+
+        function showSuccess(alreadyVerified) {
+          statusEl.setAttribute('data-state', 'success');
+          statusText.textContent = alreadyVerified
+            ? 'Your email is already verified.'
+            : 'Email verified successfully.';
+          titleEl.textContent = alreadyVerified ? 'Already verified' : 'You\u0027re all set';
+          leadEl.textContent = alreadyVerified
+            ? 'Nothing else to do — your account is good to go.'
+            : 'Thanks for confirming your address. You can now use every feature in MainDraw.';
+          primaryBtn.textContent = 'Open the MainDraw app';
+          actionsEl.hidden = false;
+        }
+
+        function showError(message) {
+          statusEl.setAttribute('data-state', 'error');
+          statusText.textContent = message || 'This verification link is invalid or has expired.';
+          titleEl.textContent = 'Verification failed';
+          leadEl.textContent = 'Open the app and tap "Resend" on the banner at the top to get a fresh link.';
+          primaryBtn.textContent = 'Open the MainDraw app';
+          actionsEl.hidden = false;
+        }
+
+        if (!token) {
+          showError('No verification token found in the link.');
+          return;
+        }
+
+        fetch('/api/auth/verify-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token: token }),
+        })
+          .then(function (res) {
+            return res.json().then(function (body) {
+              return { ok: res.ok, status: res.status, body: body };
+            });
+          })
+          .then(function (result) {
+            if (result.ok && result.body && result.body.ok) {
+              showSuccess(result.body.alreadyVerified === true);
+              return;
+            }
+            var msg = (result.body && result.body.error) || 'This verification link is invalid or has expired.';
+            showError(msg);
+          })
+          .catch(function () {
+            showError('We could not reach the server. Check your connection and try again.');
+          });
+      })();
+    </script>
+  </body>
+</html>

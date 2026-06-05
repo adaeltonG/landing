@@ -175,6 +175,126 @@
         width: auto;
       }
 
+      .android-waitlist,
+      .android-only {
+        display: none;
+      }
+
+      .device-android .ios-download {
+        display: none;
+      }
+
+      .device-android .android-waitlist {
+        display: grid;
+      }
+
+      .device-android .android-only {
+        display: block;
+      }
+
+      .android-waitlist {
+        width: min(100%, 560px);
+        margin: 24px auto 0;
+        gap: 12px;
+        border: 1px solid rgba(148, 230, 106, 0.58);
+        border-radius: 8px;
+        background: #fbfff8;
+        color: var(--ink);
+        padding: 18px;
+        box-shadow: 0 18px 42px rgba(0, 0, 0, 0.22);
+      }
+
+      .android-launch-label {
+        margin: 0;
+        color: var(--green-700);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .android-waitlist h2 {
+        margin: 0;
+        color: var(--green-900);
+        font-size: 28px;
+        line-height: 1.15;
+      }
+
+      .android-waitlist p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .waitlist-form {
+        display: grid;
+        gap: 8px;
+        margin-top: 4px;
+      }
+
+      .waitlist-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 8px;
+      }
+
+      .waitlist-label {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .waitlist-input {
+        min-width: 0;
+        width: 100%;
+        height: 48px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 0 14px;
+        font: inherit;
+        color: var(--ink);
+        background: #ffffff;
+      }
+
+      .waitlist-input:focus {
+        border-color: var(--green-700);
+        outline: 3px solid rgba(148, 230, 106, 0.32);
+      }
+
+      .waitlist-submit {
+        height: 48px;
+        border: 0;
+        border-radius: 8px;
+        padding: 0 18px;
+        background: var(--green-700);
+        color: #ffffff;
+        font: inherit;
+        font-weight: 900;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+
+      .waitlist-submit:disabled {
+        opacity: 0.68;
+        cursor: wait;
+      }
+
+      .waitlist-status {
+        min-height: 18px;
+        font-size: 13px;
+        color: var(--green-700) !important;
+      }
+
+      .waitlist-status.is-error {
+        color: #a52622 !important;
+      }
+
       .availability {
         margin: 0;
         color: rgba(248, 255, 244, 0.72);
@@ -423,6 +543,11 @@
         line-height: 1.5;
       }
 
+      .info-card--prize {
+        border-color: rgba(22, 87, 7, 0.4);
+        background: var(--lime-soft);
+      }
+
       .final-cta {
         margin-top: 18px;
         border-radius: 8px;
@@ -561,6 +686,14 @@
           font-size: 14px;
         }
 
+        .waitlist-row {
+          grid-template-columns: 1fr;
+        }
+
+        .waitlist-submit {
+          width: 100%;
+        }
+
         .appstore-link img {
           height: 48px;
         }
@@ -591,7 +724,7 @@
             </p>
             <div class="hero-actions">
               <a
-                class="appstore-link"
+                class="appstore-link ios-download"
                 href="https://apps.apple.com/app/id6768060881"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -603,6 +736,32 @@
                 />
               </a>
               
+            </div>
+            <div class="android-waitlist" id="android-waitlist" data-android-waitlist>
+              <p class="android-launch-label">Android waitlist</p>
+              <h2>Android access opens June 10, 2026.</h2>
+              <p>
+                Leave your email and we will notify you as soon as Android downloads open, so you can create your
+                profile, enter your level, and compete for cash prize places.
+              </p>
+              <form class="waitlist-form" data-android-waitlist-form>
+                <label class="waitlist-label" for="android-waitlist-email">Email address</label>
+                <div class="waitlist-row">
+                  <input
+                    class="waitlist-input"
+                    id="android-waitlist-email"
+                    name="email"
+                    type="email"
+                    inputmode="email"
+                    autocomplete="email"
+                    placeholder="you@example.com"
+                    required
+                    data-android-email
+                  />
+                  <button class="waitlist-submit" type="submit">Notify me</button>
+                </div>
+                <p class="waitlist-status" aria-live="polite" data-android-waitlist-status></p>
+              </form>
             </div>
             <div class="proof-row" aria-label="Tournament highlights">
               <div class="proof">
@@ -644,7 +803,7 @@
               <strong>Self-umpired by design</strong>
               <p>Players arrange their own court and play by tennis etiquette, with score confirmation inside the app.</p>
             </article>
-            <article class="info-card">
+            <article class="info-card info-card--prize">
               <strong>Cash prize clarity</strong>
               <p>When you win a prize, your payout is deposited straight into your bank account immediately.</p>
             </article>
@@ -652,13 +811,17 @@
         </section>
 
         <section class="final-cta" aria-label="Download MainDraw">
-          <div>
+          <div class="ios-download">
             <h2>Ready to enter your next draw?</h2>
             <p>Download MainDraw, create your player profile, and find the tournament that matches your level.</p>
             <p class="store-note" style="text-align: center;">iPhone download only.</p>
           </div>
+          <div class="android-only">
+            <h2>Join the Android launch list.</h2>
+            <p>Android opens June 10. Add your email above and we will send the download link when it is ready.</p>
+          </div>
           <a
-            class="appstore-link"
+            class="appstore-link ios-download"
             href="https://apps.apple.com/app/id6768060881"
             target="_blank"
             rel="noopener noreferrer"
@@ -678,5 +841,59 @@
         <a href="./support.html">Support</a>.
       </footer>
     </div>
+    <script>
+      (() => {
+        const ua = navigator.userAgent || '';
+        const platform = navigator.platform || '';
+        const isAndroid = /Android/i.test(ua);
+        const isIOS =
+          /iPad|iPhone|iPod/i.test(ua) ||
+          (platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        const os = isAndroid ? 'android' : isIOS ? 'ios' : 'other';
+        document.documentElement.dataset.os = os;
+        document.body.classList.add(`device-${os}`);
+
+        const apiBase =
+          window.MAINDRAW_API_BASE ||
+          (location.protocol === 'file:' || /^(localhost|127\.0\.0\.1)$/i.test(location.hostname)
+            ? 'http://localhost:4000'
+            : location.origin);
+
+        document.querySelectorAll('[data-android-waitlist-form]').forEach((form) => {
+          const emailInput = form.querySelector('[data-android-email]');
+          const button = form.querySelector('button[type="submit"]');
+          const status = form.querySelector('[data-android-waitlist-status]');
+
+          form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const email = String(emailInput?.value || '').trim();
+            if (!email) return;
+            if (status) {
+              status.textContent = 'Joining the Android list...';
+              status.classList.remove('is-error');
+            }
+            if (button) button.disabled = true;
+            try {
+              const response = await fetch(`${apiBase}/api/android-waitlist`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, source: 'landing_android_june_10' }),
+              });
+              const data = await response.json().catch(() => ({}));
+              if (!response.ok) throw new Error(data.error || 'Could not join the Android waitlist.');
+              if (status) status.textContent = 'You are on the list. We will email you when Android opens.';
+              form.reset();
+            } catch (error) {
+              if (status) {
+                status.textContent = error.message || 'Could not join the Android waitlist. Please try again.';
+                status.classList.add('is-error');
+              }
+            } finally {
+              if (button) button.disabled = false;
+            }
+          });
+        });
+      })();
+    </script>
   </body>
 </html>

@@ -8,6 +8,25 @@
       name="description"
       content="Join MainDraw self-umpired tennis tournaments, arrange matches with opponents, submit scores, advance through the draw, and compete for cash prizes."
     />
+    <script>
+      (() => {
+        const params = new URLSearchParams(location.search);
+        const forced = String(params.get('platform') || params.get('os') || '').toLowerCase();
+        const uaData = navigator.userAgentData || null;
+        const platform = String(uaData?.platform || navigator.platform || '');
+        const ua = String(navigator.userAgent || '');
+        const combined = `${ua} ${platform}`.toLowerCase();
+        const isForcedAndroid = forced === 'android';
+        const isForcedIos = forced === 'ios' || forced === 'iphone';
+        const looksAndroid = /android/.test(combined) || (uaData?.mobile && /linux/.test(combined));
+        const looksIOS =
+          /ipad|iphone|ipod/.test(combined) ||
+          (platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        const os = isForcedAndroid ? 'android' : isForcedIos ? 'ios' : looksAndroid ? 'android' : looksIOS ? 'ios' : 'other';
+        document.documentElement.dataset.os = os;
+        document.documentElement.classList.add(`device-${os}`);
+      })();
+    </script>
     <style>
       :root {
         --green-900: #082700;
@@ -176,12 +195,18 @@
       }
 
       .android-waitlist,
+      .android-hero-copy,
       .android-only {
         display: none;
       }
 
+      .device-android .default-hero-copy,
       .device-android .ios-download {
         display: none;
+      }
+
+      .device-android .android-hero-copy {
+        display: block;
       }
 
       .device-android .android-waitlist {
@@ -717,10 +742,15 @@
         <div class="hero-grid">
           <div>
             <p class="eyebrow">Skill-based draws. Real matches. Cash prizes.</p>
-            <h1>Self-umpired tennis tournaments built for competitive players.</h1>
-            <p class="hero-copy">
+            <h1 class="default-hero-copy">Self-umpired tennis tournaments built for competitive players.</h1>
+            <p class="hero-copy default-hero-copy">
               Enter a draw at your level, arrange each round with your opponent, play at an agreed court, submit the
               score in the app, and keep advancing toward the prize places.
+            </p>
+            <h1 class="android-hero-copy">MainDraw for Android opens June 10.</h1>
+            <p class="hero-copy android-hero-copy">
+              Join the Android launch list and we will send your download link when entries open, so you can create your
+              player profile, enter tournaments at your level, and compete for cash prize places.
             </p>
             <div class="hero-actions">
               <a
@@ -843,14 +873,27 @@
     </div>
     <script>
       (() => {
-        const ua = navigator.userAgent || '';
-        const platform = navigator.platform || '';
-        const isAndroid = /Android/i.test(ua);
-        const isIOS =
-          /iPad|iPhone|iPod/i.test(ua) ||
-          (platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-        const os = isAndroid ? 'android' : isIOS ? 'ios' : 'other';
+        const detectOs = () => {
+          const params = new URLSearchParams(location.search);
+          const forced = String(params.get('platform') || params.get('os') || '').toLowerCase();
+          const uaData = navigator.userAgentData || null;
+          const platform = String(uaData?.platform || navigator.platform || '');
+          const ua = String(navigator.userAgent || '');
+          const combined = `${ua} ${platform}`.toLowerCase();
+          const looksAndroid = /android/.test(combined) || (uaData?.mobile && /linux/.test(combined));
+          const looksIOS =
+            /ipad|iphone|ipod/.test(combined) ||
+            (platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+          if (forced === 'android') return 'android';
+          if (forced === 'ios' || forced === 'iphone') return 'ios';
+          if (looksAndroid) return 'android';
+          if (looksIOS) return 'ios';
+          return 'other';
+        };
+        const os = document.documentElement.dataset.os || detectOs();
         document.documentElement.dataset.os = os;
+        document.documentElement.classList.remove('device-ios', 'device-android', 'device-other');
+        document.documentElement.classList.add(`device-${os}`);
         document.body.classList.add(`device-${os}`);
 
         const apiBase =

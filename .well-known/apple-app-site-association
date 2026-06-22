@@ -1,0 +1,25 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "7DP46X7378.com.maindraw.mobilestake"
+        ],
+        "components": [
+          {
+            "/": "/open-tournaments",
+            "comment": "Open the available tournaments list in MainDraw."
+          },
+          {
+            "/": "/open-tournaments.html",
+            "comment": "Open the available tournaments list in MainDraw."
+          },
+          {
+            "/": "/tournaments/open",
+            "comment": "Open the available tournaments list in MainDraw."
+          }
+        ]
+      }
+    ]
+  }
+}

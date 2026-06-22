@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Open tournaments | MainDraw</title>
+    <meta
+      name="description"
+      content="Open MainDraw to browse available skill-based tennis tournaments."
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+        background: #f0f4f2;
+        color: #0e3300;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background: #f0f4f2;
+      }
+
+      main {
+        width: min(100%, 460px);
+        padding: 30px 24px;
+        text-align: center;
+        background: #fff;
+        border: 1px solid #d9e7d2;
+        border-radius: 20px;
+        box-shadow: 0 14px 34px rgba(14, 51, 0, 0.1);
+      }
+
+      img {
+        width: 112px;
+        height: auto;
+      }
+
+      h1 {
+        margin: 18px 0 10px;
+        font-size: 28px;
+        line-height: 1.15;
+      }
+
+      p {
+        margin: 0 auto 22px;
+        color: #416235;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+
+      a {
+        display: block;
+        width: 100%;
+        padding: 14px 18px;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .open-app {
+        color: #fff;
+        background: #0e3300;
+      }
+
+      .app-store {
+        margin-top: 10px;
+        color: #000;
+        background: #9ae36d;
+      }
+
+      .web-app {
+        margin-top: 10px;
+        padding: 10px;
+        color: #0e3300;
+        font-size: 14px;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <img src="/official_logo2.png" alt="MainDraw" />
+      <h1>Open tournaments</h1>
+      <p>Open MainDraw to browse tournaments at your level and enter your next draw.</p>
+      <a class="open-app" href="mobilestake://open-tournaments">Open MainDraw</a>
+      <a class="app-store" href="https://apps.apple.com/app/id6768060881">Get MainDraw on the App Store</a>
+      <a class="web-app" href="https://www.maindraw.co.uk/webapp/">Continue in your browser</a>
+    </main>
+    <script>
+      window.setTimeout(function () {
+        window.location.href = "mobilestake://open-tournaments";
+      }, 80);
+    </script>
+  </body>
+</html>

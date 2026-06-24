@@ -23,6 +23,12 @@
           /ipad|iphone|ipod/.test(combined) ||
           (platform === 'MacIntel' && navigator.maxTouchPoints > 1);
         const os = isForcedAndroid ? 'android' : isForcedIos ? 'ios' : looksAndroid ? 'android' : looksIOS ? 'ios' : 'other';
+        const isMainDrawHost = /^(www\.)?maindraw\.co\.uk$/i.test(location.hostname);
+        const isRootPage = location.pathname === '/' || /\/index\.html?$/i.test(location.pathname);
+        if (os === 'android' && isMainDrawHost && isRootPage) {
+          location.replace(`/webapp/${location.search}${location.hash}`);
+          return;
+        }
         document.documentElement.dataset.os = os;
         document.documentElement.classList.add(`device-${os}`);
       })();
@@ -303,6 +309,13 @@
         font-weight: 900;
         cursor: pointer;
         white-space: nowrap;
+      }
+
+      .webapp-open-link {
+        display: inline-grid;
+        place-items: center;
+        justify-self: center;
+        text-decoration: none;
       }
 
       .waitlist-submit:disabled {
@@ -747,7 +760,7 @@
               Enter a draw at your level, arrange each round with your opponent, play at an agreed court, submit the
               score in the app, and keep advancing toward the prize places.
             </p>
-            <h1 class="android-hero-copy" style="text-align: center;"> Android version Drops June 10.</h1>
+            <h1 class="android-hero-copy" style="text-align: center;">Open MainDraw on Android.</h1>
            
             <div class="hero-actions">
               <a
@@ -765,29 +778,12 @@
               
             </div>
             <div class="android-waitlist" id="android-waitlist" data-android-waitlist>
-              <p class="android-launch-label">Android waitlist</p>
-              <h2>Android access opens June 10, 2026.</h2>
+              <p class="android-launch-label">Android web app</p>
+              <h2>MainDraw is available as a browser app.</h2>
               <p>
-                Leave your email and we will notify you as soon as Android downloads open.
+                Open the web app in Chrome, then install it to your home screen from the browser menu.
               </p>
-              <form class="waitlist-form" data-android-waitlist-form>
-                <label class="waitlist-label" for="android-waitlist-email">Email address</label>
-                <div class="waitlist-row">
-                  <input
-                    class="waitlist-input"
-                    id="android-waitlist-email"
-                    name="email"
-                    type="email"
-                    inputmode="email"
-                    autocomplete="email"
-                    placeholder="you@example.com"
-                    required
-                    data-android-email
-                  />
-                  <button class="waitlist-submit" type="submit">Notify me</button>
-                </div>
-                <p class="waitlist-status" aria-live="polite" data-android-waitlist-status></p>
-              </form>
+              <a class="waitlist-submit webapp-open-link" href="/webapp/">Open web app</a>
             </div>
             <div class="proof-row" aria-label="Tournament highlights">
               <div class="proof">
@@ -843,8 +839,8 @@
             <p class="store-note" style="text-align: center;">iPhone download only.</p>
           </div>
           <div class="android-only">
-            <h2>Join the Android launch list.</h2>
-            <p>Android opens June 10. Add your email above and we will send the download link when it is ready.</p>
+            <h2>Open MainDraw on Android.</h2>
+            <p>Use the browser app at /webapp and install it to your home screen from Chrome.</p>
           </div>
           <a
             class="appstore-link ios-download"
